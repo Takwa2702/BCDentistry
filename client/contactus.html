@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DentalChain</title>
+  <link rel="icon" href="DentalChainLogo/DentalChain.svg" />
+
+  <script src="https://kit.fontawesome.com/433b24fc29.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/welcome.css">
+  <link rel="stylesheet" href="css/contactus.css">
+</head>
+
+<body>
+  <div class="sidebar">
+        <div class="overlap-group-2">
+        <img src="icons/profile.png" alt="Doctor Profile" class="nav-profile" />
+        <div class="text-wrapper-5">Dr. Mohammad Ismail</div>
+        <div class="ellipse"></div>
+        <div class="text-wrapper-6">online</div>
+        </div>
+
+        <div class="sidebar_menu">
+        <a href="patientlist.html" class="sidebar_item">
+            <div class="sidebar_icon">
+            <i class="fas fa-list"></i>
+            </div>
+            <h4>Patients List</h4>
+        </a>
+        <a href="#" class="sidebar_item">
+            <div class="sidebar_icon">
+            <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h4>Appointment Booking</h4>
+        </a>
+        <a href="#" class="sidebar_item">
+            <div class="sidebar_icon">
+            <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h4>Hospital Map</h4>
+        </a>
+        <a href="contactus.html" class="sidebar_item">
+            <div class="sidebar_icon">
+            <i class="fas fa-phone"></i>
+            </div>
+            <h4>Contact Us</h4>
+        </a>
+        <a href="signpage.html" class="sidebar_item">
+            <div class="sidebar_icon">
+            <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <h4>Sign Out</h4>        
+        </a>
+        </div>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <div class="btn-toggle"><i class="fa-solid fa-bars" style="font-size: 50px; color: rgb(245, 247, 245);"></i></div>
+      <!-- logo --> 
+      <img src="DentalChainLogo/DentalChain(1).png" class="logo-image">
+      <!-- sign out  -->   
+    </header>
+
+    <div class="content">
+        <div class="container">
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1dYOUR_LATITUDE!2dYOUR_LONGITUDE!3dYOUR_ZOOM_LEVEL!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1468899355787" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <div class="contact-form">
+                <h1 class="title">Contact Us</h1>
+                <h2 class="subtitle">We are here assist you.</h2>
+                <form action="">
+                    <input type="text" name="name" placeholder="Your Name" />
+                    <input type="email" name="e-mail" placeholder="Your E-mail Adress" />
+                    <input type="tel" name="phone" placeholder="Your Phone Number"/>
+                    <textarea name="text" id="" rows="8" placeholder="Your Message"></textarea>
+                    <button class="btn-send">Get a Call Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = load;
+
+    function load() {
+      let btnToggle = document.querySelector(".btn-toggle");
+
+      btnToggle.addEventListener("click", (e) => {
+        let sidebar = document.querySelector(".sidebar");
+        let container = document.querySelector(".container");
+        sidebar.classList.toggle("active");
+        container.classList.toggle("active_margin_left");
+      });
+    }
+
+  </script>
+</body>
+
+</html>
+
+

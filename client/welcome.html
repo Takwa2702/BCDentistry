@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DentalChain</title>
+  <link rel="icon" href="DentalChainLogo/DentalChain.svg" />
+
+  <script src="https://kit.fontawesome.com/433b24fc29.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/welcome.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="overlap-group-2">
+      <img src="icons/profile.png" alt="Doctor Profile" class="nav-profile" />
+      <div class="text-wrapper-5">Dr. Mohammad Ismail</div>
+      <div class="ellipse"></div>
+      <div class="text-wrapper-6">online</div>
+    </div>
+
+    <div class="sidebar_menu">
+      <a href="patientlist.html" class="sidebar_item">
+        <div class="sidebar_icon">
+          <i class="fas fa-list"></i>
+        </div>
+        <h4>Patients List</h4>
+      </a>
+      <a href="#" class="sidebar_item">
+        <div class="sidebar_icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <h4>Appointment Booking</h4>
+      </a>
+      <a href="#" class="sidebar_item">
+        <div class="sidebar_icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h4>Hospital Map</h4>
+      </a>
+      <a href="#" class="sidebar_item">
+        <div class="sidebar_icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <h4>Contact Us</h4>
+      </a>
+      <a href="signpage.html" class="sidebar_item">
+        <div class="sidebar_icon">
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h4>Sign Out</h4>        
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <div class="btn-toggle"><i class="fa-solid fa-bars" style="font-size: 50px; color: rgb(245, 247, 245);"></i></div>
+      <!-- logo --> 
+      <img src="DentalChainLogo/DentalChain(1).png" class="logo-image">
+      <!-- sign out  -->
+      
+    </header>
+
+    <div class="content">
+      <div class="welcome-section" style="padding-left:20px">
+        <div class="text-wrapper-2">Welcome Page</div>
+        <div class="overlap-2">
+          <p class="this-website">
+            This website provides many services, including:<br />
+            . Patient Registration<br />
+            . Patient List<br />
+            . Appointment Booking <br />
+            . Hospital Map </p>
+          <div class="text-wrapper-3">Welcome!</div>
+          <p class="p">For more information, you can email us at: shjhospital@gov.ae</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = load;
+
+    function load() {
+      let btnToggle = document.querySelector(".btn-toggle");
+
+      btnToggle.addEventListener("click", (e) => {
+        let sidebar = document.querySelector(".sidebar");
+        let container = document.querySelector(".container");
+        sidebar.classList.toggle("active");
+        container.classList.toggle("active_margin_left");
+      });
+    }
+
+  </script>
+</body>
+
+</html>
+
+

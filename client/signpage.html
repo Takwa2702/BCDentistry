@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DentalChain</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="DentalChainLogo/DentalChain.png" />
+    <!-- <link rel="stylesheet" href="globals.css" /> -->
+    <link rel="stylesheet" href="css/signpage.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+  </head>
+  <body>
+    <div class="desktop">
+      <div class="overlap-wrapper">
+        <div class="overlap">
+          <div class="side-part">
+            <div class="overlap-group">
+              <div class="rectangle"></div>
+              <div class="ellipse"></div>
+              <div class="div"></div>
+              <div class="ellipse-2"></div>
+              <div class="ellipse-3"></div>
+              <div class="ellipse-4"></div>
+              <div class="text-wrapper-2">DentalChain</div>
+              <p class="text-wrapper">
+                DentalChain is an Electronic Dental Record system based on Blockchain for registering and managing patient dental information.
+              </p>
+              <div class="rectangle-2"></div>
+              <div class="ellipse-5"></div>
+            </div>
+          </div>
+          <div class="sign-in">
+            <img src="DentalChainLogo/DentalChain(1).png" alt="DentalChain Logo" class="logo-image">
+            <div class="container mt-5">
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h2 class="text-center">Sign in</h2>
+                    </div>
+                    <div class="card-body">
+                      <form id="loginForm">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="walletAddress"
+                            readonly
+                          />
+                          <button
+                            type="button"
+                            class="btn-primary-mt-2"
+                            id="connectWalletBtn"
+                            >
+                            Connect to Metamask
+                          </button>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">
+                          Sign in
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <p>Don't have MetaMask installed? <a href="https://metamask.io/download/" target="_blank">Download MetaMask</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const connectWalletBtn = document.getElementById('connectWalletBtn');
+        const walletAddressInput = document.getElementById('walletAddress');
+        const loginForm = document.getElementById('loginForm');
+    
+        // Function to connect the wallet
+        connectWalletBtn.addEventListener('click', async () => {
+          try {
+            // Check if MetaMask is installed
+            if (typeof window.ethereum !== 'undefined') {
+              // Request user accounts
+              const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    
+              if (accounts.length > 0) {
+                walletAddressInput.value = accounts[0];
+                walletAddressInput.style.display = 'block'; // Show the wallet address field
+              }
+            } else {
+              alert('MetaMask is not installed. Please install and connect.');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        });
+    
+        // Function to handle form submission
+        loginForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const walletAddress = walletAddressInput.value;
+          console.log(walletAddress);
+          doctorAddress = '0xF8ff1940492C5a272f93B1Ab7c0b04B36936bd1b'
+
+          if (walletAddress.toLowerCase() === doctorAddress.toLowerCase()) {
+            // Redirect to the welcome page for the doctor
+            alert('Successfully logged in!');
+            window.location.href = 'welcome.html';
+          } else {
+            // Display an error message for non-doctor addresses
+            alert("You are not authorized to access the welcome page.");
+          }
+        });
+      });
+    </script>
+    
+  </body>
+</html>
+
+

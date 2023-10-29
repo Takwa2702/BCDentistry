@@ -1,0 +1,81 @@
+/* // Config colors */
+
+
+
+
+
+@import 'https://fonts.googleapis.com/css?family=Libre+Franklin:400,700';
+
+
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #242424;
+    --input-color: #B7B7B7;
+    --btn-color: #A383C9;
+    --container-color: #F8F8F8;
+    --font-default: 'Libre Franklin', sans-serif;
+    --bg-color-gradient: linear-gradient(to bottom, #abbaab , #ffffff);
+  }
+
+/* html, body {
+    background: --bg-color;
+    font-family: 'Libre Franklin', sans-serif;
+} */
+ 
+  
+.container {
+    background: --container-color;
+    position: relative;
+}
+  
+  
+.map {
+    width: 40%;
+    float: left;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+    
+.contact-form{
+    width: 55%;
+    margin-left: 2%;
+    float: left;
+}
+
+.title {
+      font-size: 2.5em;
+      font-family: --font-default;
+      font-weight: 900;
+      color: --text-color;
+      margin: 5% 8%;
+}
+
+.subtitle{
+    font-size: 1.2em;
+    font-weight: 400;
+    margin: 0 4% 5% 8%;
+}
+      
+    
+input,
+textarea{
+    width: 330px;
+    padding: 3%;
+    margin: 2% 8%;
+    color: --text-color;
+    border: 1px solid --input-color;
+    --::placeholder;
+    color: --text-color;
+}
+      
+
+.btn-send{
+    background: --btn-color;
+    width: 180px;
+    height: 60px;
+    color: --container-color;
+    font-weight: 700;
+    margin: 2% 8%;
+}
+      

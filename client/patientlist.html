@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentalChain</title>
+    <link rel="icon" href="DentalChainLogo/DentalChain.svg" />
+    <link rel="stylesheet" href="css/patientlist.css" />
+    <link rel="stylesheet" href="css/welcome.css">
+    
+    <script src="https://kit.fontawesome.com/433b24fc29.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="overlap-group-2">
+        <img src="icons/profile.png" alt="Doctor Profile" class="nav-profile" />
+        <div class="text-wrapper-5">Dr. Mohammad Ismail</div>
+        <div class="ellipse"></div>
+        <div class="text-wrapper-6">online</div>
+      </div>
+  
+      <div class="sidebar_menu">
+        <a href="patientlist.html" class="sidebar_item" style="background-color: #fff;  color: var(--smoky-black);
+        transition: all 0.3s linear;">
+          <div class="sidebar_icon">
+            <i class="fas fa-list"></i>
+          </div>
+          <h4>Patients List</h4>
+        </a>
+        <a href="#" class="sidebar_item">
+          <div class="sidebar_icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h4>Appointment Booking</h4>
+        </a>
+        <a href="#" class="sidebar_item">
+          <div class="sidebar_icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h4>Hospital Map</h4>
+        </a>
+        <a href="contactus.html" class="sidebar_item">
+          <div class="sidebar_icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <h4>Contact Us</h4>
+        </a>
+        <a href="signpage.html" class="sidebar_item">
+          <div class="sidebar_icon">
+            <i class="fas fa-sign-out-alt"></i>
+          </div>
+          <h4>Sign Out</h4>        
+        </a>
+      </div>
+    </div>
+  
+    <div class="container">
+      <header class="header">
+        <div class="btn-toggle"><i class="fa-solid fa-bars" style="font-size: 50px; color: rgb(245, 247, 245);"></i></div>
+        <!-- logo --> 
+        <a href="welcome.html" class="logo-image" >
+           <img src="DentalChainLogo/DentalChain(1).png" class="logo-image" > 
+        </a>    
+      </header>
+  
+      <div class="content-patient-list">
+        <div class="patient-list-text">Patient List</div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-box clearfix">
+              <div class="table-responsive">
+                <form id="search-form"> 
+                  <input type="search" id="query" name="q" placeholder="Search...">
+                  <button class="btn-search"><i class="fa fa-search"></i></button>
+                </form>
+                <input type=button class="btn-add-patient" value="+ Add Patient" onclick="openForm()">  
+                <table class="table user-list">
+                  <thead>
+                    <tr>
+                      <th><span>Patient ID </span></th>
+                      <th><span>First Name</span></th>
+                      <th class="text-center"><span>Age</span></th>
+                      <th><span>Dental Diagnosis</span></th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody id="patientList">
+                    <!-- Table content -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay" id="overlay"></div>
+
+      <!-- Popup view patient -->
+      <div class="popup" id="patientPopup">
+        <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <h2>Patient Information</h2>
+          <div id="patientInfo"></div>
+        </div>
+      </div>
+      
+      <div class="addPatientPopup">
+        <div class="formPopup" id="popupForm">
+          <form id="registerPatientForm" class="formContainer">
+            <h2>Patient Registery Form</h2>
+            <label for="firstname">
+              <strong>Name</strong>
+            </label>
+            <input type="text" id="name" placeholder="Patient's Name" name="name" required>
+            <label for="age">
+              <strong>Age</strong>
+            </label>
+            <input type="number" id="age" placeholder="Patient's Age" name="age" required>
+            <label for="firstname">
+              <strong>Dental Diagnosis</strong>
+            </label>
+            <input type="text" id="diagnosis" placeholder="Patient's Dental Diagnosis" name="diagnosis" required>
+            <label for="diagnosis">
+            <button type="submit" class="btn"  onclick="registerPatient()">Submit</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Edit Patient Form -->
+      <div class="editPatientPopup">
+        <div class="formPopup" id="editForm">
+          <form class="formContainer">
+            <h2>Edit Patient's Information</h2>
+            <label for="editName"><strong>Name</strong></label>
+            <input type="text" id="editName" placeholder="Patient's Name" name="editName" required>
+            <label for="editAge"><strong>Age</strong></label>
+            <input type="number" id="editAge" placeholder="Patient's Age" name="editAge" required>
+            <label for="editDiagnosis"><strong>Dental Diagnosis</strong></label>
+            <input type="text" id="editDiagnosis" placeholder="Patient's Dental Diagnosis" name="editDiagnosis" required>
+            <button type="button" class="btn" id="updateButton">Update</button>
+            <button type="button" class="btn cancel" onclick="closeEditForm()">Cancel</button>
+          </form>
+        </div>
+      </div>
+
+      
+      <script>
+          function openForm() {
+              document.getElementById("popupForm").style.display = "block";
+              document.getElementById("overlay").style.display = "block"; // Show the overlay
+          }
+
+          function closeForm() {
+              document.getElementById("popupForm").style.display = "none";
+              document.getElementById("overlay").style.display = "none"; // Hide the overlay
+          }
+      </script>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+     <script>
+        
+        // Initialize Web3.js
+        const web3 = new Web3("http://localhost:8545"); // Replace with your Ganache URL
+
+        // Check if Web3 is connected to a provider (Ganache)
+        web3.eth.net.isListening()
+          .then(() => console.log("Connected to Ganache"))
+          .catch(() => console.error("Not connected to Ganache"));
+         // import contract address and abi
+          const contractAddress = "0xD122EA28eAc1EbC2c1E5805124Bc2b7b6e9876c6"; // replace contrcat address with valid contract address 
+          const contractAbi = [
+            {
+              "anonymous": false,
+              "inputs": [
+                {
+                  "indexed": true,
+                  "internalType": "uint256",
+                  "name": "patientId",
+                  "type": "uint256"
+                },
+                {
+                  "indexed": false,
+                  "internalType": "string",
+                  "name": "_name",
+                  "type": "string"
+                },
+                {
+                  "indexed": false,
+                  "internalType": "uint256",
+                  "name": "_age",
+                  "type": "uint256"
+                },
+                {
+                  "indexed": false,
+                  "internalType": "string",
+                  "name": "_dentalInfo",
+                  "type": "string"
+                }
+              ],
+              "name": "PatientInfoUpdated",
+              "type": "event"
+            },
+            {
+              "anonymous": false,
+              "inputs": [
+                {
+                  "indexed": true,
+                  "internalType": "uint256",
+                  "name": "patientId",
+                  "type": "uint256"
+                },
+                {
+                  "indexed": false,
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                }
+              ],
+              "name": "PatientRegistered",
+              "type": "event"
+            },
+            {
+              "inputs": [],
+              "name": "patientCount",
+              "outputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function",
+              "constant": true
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "name": "patients",
+              "outputs": [
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "age",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "dentalInfo",
+                  "type": "string"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function",
+              "constant": true
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "string",
+                  "name": "_name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "_age",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "_dentalInfo",
+                  "type": "string"
+                }
+              ],
+              "name": "registerPatient",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "_patientId",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getPatient",
+              "outputs": [
+                {
+                  "internalType": "string",
+                  "name": "",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "",
+                  "type": "string"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function",
+              "constant": true
+            },
+            {
+              "inputs": [],
+              "name": "getAllPatients",
+              "outputs": [
+                {
+                  "internalType": "uint256[]",
+                  "name": "",
+                  "type": "uint256[]"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function",
+              "constant": true
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "_patientId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "_name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "_age",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "_dentalInfo",
+                  "type": "string"
+                }
+              ],
+              "name": "updatePatientInfo",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            }
+          ];
+
+          const contract = new web3.eth.Contract(contractAbi, contractAddress);
+          // Function to retrieve and display patient information
+          async function viewPatient(patientId) {
+
+            const patientInfo = document.getElementById("patientInfo");
+            const popup = document.getElementById("patientPopup");
+            const closePopup = document.getElementById("closePopup");
+
+            const patientData = await contract.methods.getPatient(patientId).call();
+            const patientName = patientData[0];
+            const patientAge = patientData[1];
+            const dentalDiagnosis = patientData[2];
+
+            // Populate the patient information in the popup
+            patientInfo.innerHTML = `
+              <strong>Patient ID:</strong> ${patientId}<br>
+              <strong>Name:</strong> ${patientName}<br>
+              <strong>Age:</strong> ${patientAge}<br>
+              <strong>Dental Diagnosis:</strong> ${dentalDiagnosis}
+            `;
+
+            // Show the popup
+            popup.style.display = "block";
+
+            // Close the popup when the close button is clicked
+            closePopup.onclick = function() {
+              popup.style.display = "none";
+            };
+
+            // Close the popup when the user clicks outside the content
+            window.onclick = function(event) {
+              if (event.target === popup) {
+                popup.style.display = "none";
+              }
+            };
+          }
+
+          document.getElementById("registerPatientForm").addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const age = document.getElementById("age").value;
+          const diagnosis = document.getElementById("diagnosis").value;
+          
+          try {
+            // Send a transaction to register the patient
+            const accounts = await web3.eth.getAccounts();
+            const gasLimit = 200000; // Adjust as needed
+            const gasPrice = web3.utils.toWei("20", "gwei"); // Adjust as needed
+            await contract.methods.registerPatient(name, age, diagnosis)
+            .send({ from: accounts[0], gas: gasLimit, gasPrice: gasPrice })
+            .then((receipt) => {
+              // Handle successful transaction
+              alert("Patient registered successfully!");
+              window.location.reload(); // Refresh the page
+            })
+            .catch((error) => {
+              // Handle transaction failure
+              console.error("Error registering patient:", error);
+            });
+
+          
+          } catch (error) {
+            console.error("Error registering patient:", error);
+            alert("Error registering patient. Check the console for details.");
+          }
+        });
+
+        // Function to open the edit patient form with existing data
+        async function editPatient(patientId, name, age, diagnosis) {
+          const editForm = document.getElementById("editForm");
+          const editName = document.getElementById("editName");
+          const editAge = document.getElementById("editAge");
+          const editDiagnosis = document.getElementById("editDiagnosis");
+          const updateButton = document.getElementById("updateButton");
+
+          editForm.style.display = "block";
+          document.getElementById("overlay").style.display = "block";
+
+          // Pre-fill the form fields with existing data
+          editName.value = name;
+          editAge.value = age;
+          editDiagnosis.value = diagnosis;
+
+          // Handle the update button click
+          updateButton.onclick = async function () {
+            const updatedName = editName.value;
+            const updatedAge = editAge.value;
+            const updatedDiagnosis = editDiagnosis.value;
+
+            try {
+              // Send a transaction to update the patient's information
+              const accounts = await web3.eth.getAccounts();
+              const gasLimit = 200000; // Adjust as needed
+              const gasPrice = web3.utils.toWei("20", "gwei"); // Adjust as needed
+
+              await contract.methods
+                .updatePatientInfo(patientId, updatedName, updatedAge, updatedDiagnosis)
+                .send({ from: accounts[0], gas: gasLimit, gasPrice: gasPrice })
+                .then((receipt) => {
+                  // Handle successful transaction
+                  alert("Patient information updated successfully!");
+                  editForm.style.display = "none";
+                  document.getElementById("overlay").style.display = "none";
+                  window.location.reload(); // Refresh the page
+                })
+                .catch((error) => {
+                  // Handle transaction failure
+                  console.error("Error updating patient information:", error);
+                });
+            } catch (error) {
+              console.error("Error updating patient information:", error);
+              alert("Error updating patient information. Check the console for details.");
+            }
+          };
+        }
+
+        // Function to close the edit patient form
+        function closeEditForm() {
+          document.getElementById("editForm").style.display = "none";
+          document.getElementById("overlay").style.display = "none";
+        }
+
+
+
+     </script>
+
+     <!-- Fill the table with blockchain data -->
+    <script>
+      // Function to retrieve and display all patient data
+     async function getAllPatients() {
+       try {
+         // Call the contract's getAllPatients function
+         const patientIds = await contract.methods.getAllPatients().call();
+         const patientListTable = document.getElementById("patientList");
+
+         // Clear existing table rows
+         while (patientListTable.firstChild) {
+           patientListTable.removeChild(patientListTable.firstChild);
+         }
+
+         // Loop through patient IDs and retrieve data for each patient
+         for (const patientId of patientIds) {
+           const patientData = await contract.methods.getPatient(patientId).call();
+
+           // Create a new row for the patient and add it to the table
+           const row = document.createElement("tr");
+           const idCell = document.createElement("td");
+           const nameCell = document.createElement("td");
+           const ageCell = document.createElement("td");
+           const diagnosisCell = document.createElement("td");
+           const actionsCell = document.createElement("td");
+
+           idCell.textContent = patientId;
+           nameCell.textContent = patientData[0]; // Name
+           ageCell.textContent = patientData[1]; // Age
+           diagnosisCell.textContent = patientData[2]; // Dental Diagnosis
+
+           // Action links (View)
+           const viewLink = document.createElement("button");
+          //  viewLink.textContent = "View";
+           viewLink.className = "table-link";
+           viewLink.addEventListener("click", () => {
+            viewPatient(patientId);
+            });
+          const viewIcon = document.createElement("i");
+          viewIcon.className = "fas fa-search"; // Replace with the class for your desired icon
+          // Append the icon to the button
+          viewLink.appendChild(viewIcon);
+         
+
+          // Action links (Edit)
+          const editLink = document.createElement("button");
+          editLink.className = "table-link";
+          editLink.addEventListener("click", () => {
+            editPatient(patientId, patientData[0], patientData[1],patientData[2]);
+            });
+          const editIcon = document.createElement("i");
+          editIcon.className = "fas fa-edit"; // Replace with the class for your desired icon
+          // Append the icon to the button
+          editLink.appendChild(editIcon);
+
+
+          // we will implment it later
+          //  const deleteLink = document.createElement("a");
+          //  deleteLink.href = "#";
+          //  deleteLink.textContent = "Delete";
+          //  deleteLink.className = "table-link danger";
+
+           actionsCell.appendChild(viewLink);
+           actionsCell.appendChild(editLink);
+          //  actionsCell.appendChild(deleteLink);
+
+           row.appendChild(idCell);
+           row.appendChild(nameCell);
+           row.appendChild(ageCell);
+           row.appendChild(diagnosisCell);
+           row.appendChild(actionsCell);
+
+           patientListTable.appendChild(row);
+         }
+       } catch (error) {
+         console.error("Error retrieving patient data:", error);
+         alert("Error retrieving patient data. Check the console for details.");
+       }
+     }
+
+     // Call the getAllPatients function to populate the table when the page loads
+     window.addEventListener("load", () => {
+       getAllPatients();
+     });
+      </script>
+
+      <!-- Toggle Sidebar -->
+      <script>
+        window.onload = load;
+
+        function load() {
+          let btnToggle = document.querySelector(".btn-toggle");
+
+          btnToggle.addEventListener("click", (e) => {
+            let sidebar = document.querySelector(".sidebar");
+            let container = document.querySelector(".container");
+            sidebar.classList.toggle("active");
+            container.classList.toggle("active_margin_left");
+          });
+        }
+
+      </script>
+  </body>
+</html>
+
